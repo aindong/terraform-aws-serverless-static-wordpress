@@ -31,7 +31,7 @@ resource "aws_lambda_function" "object_redirect" {
   role             = aws_iam_role.lambda-edge.arn
   handler          = "index.handler"
   source_code_hash = data.archive_file.index_html.output_base64sha256
-  runtime          = "nodejs12.x"
+  runtime          = "nodejs18.x"
   publish          = true
   memory_size      = 128
   timeout          = 3
