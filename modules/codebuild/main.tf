@@ -4,14 +4,25 @@ data "aws_region" "current" {}
 # TODO: Add optional versioning for S3 bucket
 #tfsec:ignore:AWS002 #tfsec:ignore:AWS077
 resource "aws_s3_bucket" "code_source" {
-  bucket        = var.codebuild_bucket
-  acl           = "private"
+  bucket = var.codebuild_bucket
+  # acl    = "private"
+
   force_destroy = true
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
+  # server_side_encryption_configuration {
+  #   rule {
+  #     apply_server_side_encryption_by_default {
+  #       sse_algorithm = "AES256"
+  #     }
+  #   }
+  # }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "code_source" {
+  bucket = var.codebuild_bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
   }
 }
