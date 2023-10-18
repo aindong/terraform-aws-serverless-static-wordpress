@@ -17,15 +17,15 @@ resource "aws_s3_bucket" "code_source" {
   # }
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "code_source" {
-  bucket = var.codebuild_bucket
+# resource "aws_s3_bucket_server_side_encryption_configuration" "code_source" {
+#   bucket = var.codebuild_bucket
 
-  rule {
-    apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
-    }
-  }
-}
+#   rule {
+#     apply_server_side_encryption_by_default {
+#       sse_algorithm = "AES256"
+#     }
+#   }
+# }
 
 resource "aws_s3_bucket_public_access_block" "code_source" {
   bucket                  = aws_s3_bucket.code_source.id
